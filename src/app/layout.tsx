@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${merriweather.variable} ${cinzelDecorative.variable} antialiased`}
+        className={`${merriweather.variable} ${cinzelDecorative.variable}  antialiased`}
       >
         {children}
         <Analytics />
