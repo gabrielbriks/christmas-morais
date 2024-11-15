@@ -8,7 +8,15 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        cinzel: ["var(--font-cinzel)", "serif"],
+        merriweather: ["var(--font-merriweather)", "serif"],
+      },
+      backgroundImage: {
+        "hero-background": "url('/bg-lamp-2.jpg')",
+      },
       colors: {
+        primary: "var(--primary)",
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
