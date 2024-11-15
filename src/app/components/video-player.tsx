@@ -18,12 +18,13 @@ export function VideoPlayer() {
   };
   return (
     <div className="flex flex-col w-full h-full max-h-screen max-w-screen-lg items-center justify-between mt-20">
-      <div className="flex-col">
+      <div className="flex-col w-full">
         <p className="font-merriweather italic text-center w-full text-primary text-lg">
           Assista o vídeo
         </p>
         <Video
           className="mt-10 rounded-sm"
+          style={{ borderRadius: "32px" }}
           src={videoSample}
           onTimeUpdate={handleTimeUpdate}
         />
