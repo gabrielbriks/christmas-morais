@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Cinzel_Decorative, Merriweather } from "next/font/google";
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${merriweather.variable} ${cinzelDecorative.variable} antialiased`}
       >
         {children}
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
