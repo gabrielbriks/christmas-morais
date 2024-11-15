@@ -1,5 +1,5 @@
 "use client";
-import videoSample from "@/../videos/video-sample.mp4";
+import videoSample from "@/../videos/video_sample.mp4";
 import Video from "next-video";
 import { useState } from "react";
 export function VideoPlayer() {
