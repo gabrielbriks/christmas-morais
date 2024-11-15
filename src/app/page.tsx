@@ -1,4 +1,5 @@
-import { VideoPlayer } from "./components/video-player";
+import { Suspense } from "react";
+import { FallbackLoading, VideoPlayer } from "./components/video-player";
 export default function Home() {
   return (
     <div className="min-h-screen w-full bg-background text-white flex flex-col items-center sm:p-10 max-sm:p-5 bg-hero-background bg-no-repeat bg-auto sm:bg-right-bottom max-sm:bg-bottom ">
@@ -9,8 +10,9 @@ export default function Home() {
         <p className="font-merriweather text-lg sm:text-2xl mt-4 text-primary font-light w-full text-center  ">
           Estamos pensando em construir uma nova memória com você...
         </p>
-
-        <VideoPlayer />
+        <Suspense fallback={<FallbackLoading />}>
+          <VideoPlayer />
+        </Suspense>
         {/* <div className="flex flex-col w-full max-w-screen-lg items-center justify-center mt-20">
           <p className="font-merriweather italic text-center w-full text-primary text-lg">
             Assista o vídeo
