@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Cinzel_Decorative, Merriweather } from "next/font/google";
 import "./globals.css";
@@ -30,6 +31,7 @@ export default function RootLayout({
         className={`${merriweather.variable} ${cinzelDecorative.variable} antialiased`}
       >
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
