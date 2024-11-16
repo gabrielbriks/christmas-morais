@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Cinzel_Decorative, Merriweather } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const cinzelDecorative = Cinzel_Decorative({
@@ -32,6 +33,14 @@ export default function RootLayout({
         className={`${merriweather.variable} ${cinzelDecorative.variable}  antialiased`}
       >
         {children}
+        <Toaster
+          position="top-right"
+          toastOptions={{ closeButton: true }}
+          richColors
+          pauseWhenPageIsHidden
+          theme="light"
+          duration={7200}
+        />
         <Analytics />
         <SpeedInsights />
       </body>

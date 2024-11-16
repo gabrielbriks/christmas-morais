@@ -10,8 +10,9 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import Image from "next/image";
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "./ui/button";
 import {
@@ -45,31 +46,21 @@ export function DialogAccess() {
   const onSubmit = ({ pin }: FormSchemaType) => {
     if (pin === "0225") {
       isOpen(false);
+    } else {
+      toast.error("O PIN está inválido!", {
+        description: "Confira se preencheu o PIN corretamente.",
+      });
+      form.reset();
     }
-
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // });
-  };
-
-  const handleValidadePass = (e: FormEvent) => {
-    e.preventDefault();
-    console.log("valPass::: ", e.currentTarget);
-    isOpen(false);
   };
 
   return (
     <Dialog open={open}>
       {/* <DialogTrigger>Open</DialogTrigger> */}
-      <DialogContent>
+      <DialogContent className="rounded-lg">
         <DialogHeader className="justify-center items-center">
           <DialogTitle className="text-primary text-2xl font-merriweather">
-            Insira aqui a senha de acesso?
+            Insira aqui o PIN de acesso?
           </DialogTitle>
           <DialogDescription className="text-primary text-base font-merriweather">
             Se você não sabe qual é, retorne na mensagem que lhe enviamos.
@@ -88,7 +79,7 @@ export function DialogAccess() {
                 name="pin"
                 render={({ field }) => (
                   <FormItem className="flex-col gap-4 w-full justify-center items-center text-white">
-                    <div className="flex w-full gap-4">
+                    <div className="flex w-full gap-4 justify-center items-center">
                       <FormLabel className="text-white text-lg justify-center text-center self-center">
                         PIN
                       </FormLabel>
@@ -109,10 +100,6 @@ export function DialogAccess() {
                         </InputOTP>
                       </FormControl>
                     </div>
-
-                    {/* <FormDescription>
-                      Please enter the one-time password sent to your phone.
-                      </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -122,7 +109,7 @@ export function DialogAccess() {
             <DialogFooter className="w-full flex justify-center items-center mt-10">
               <Button
                 type="submit"
-                className="bg-primary text-background text-lg font-merriweather "
+                className="bg-primary text-background text-lg font-merriweather font-semibold"
               >
                 Confirmar
               </Button>
