@@ -2,10 +2,20 @@
 import { getCldVideoUrl } from "next-cloudinary";
 // import Player from "next-video/player";
 import { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
+
+import { MediaPlayer, MediaProvider } from "@vidstack/react";
+import {
+  defaultLayoutIcons,
+  DefaultVideoLayout,
+} from "@vidstack/react/player/layouts/default";
+import "@vidstack/react/player/styles/default/layouts/video.css";
+import "@vidstack/react/player/styles/default/theme.css";
 
 const URL_VIDEO =
   "https://res.cloudinary.com/moraisdev/video/upload/v1658243266/samples/cld-sample-video.mp4";
+
+const URL_VIDEO_R2 = "https://r2.moraisgabriel.com.br/main-video.mp4";
 export const FallbackLoading = () => {
   return (
     <div className="flex w-full h-full items-center justify-center text-primary">
@@ -49,8 +59,25 @@ export function VideoPlayer() {
         </p>
         {showPlayer && (
           <div className="w-full h-full justify-center items-center">
-            {/* <Player src={URL_VIDEO} onTimeUpdate={handleTimeUpdate} /> */}
-            <ReactPlayer
+            <MediaPlayer
+              playsInline
+              title="Sprite Fight"
+              src={URL_VIDEO_R2}
+              onTimeUpdate={(e) => {
+                console.log("Sprite fight", e);
+                if (e.currentTime >= 142.239576) {
+                  setShowConfirmButton(true);
+                }
+              }}
+            >
+              <MediaProvider />
+              <DefaultVideoLayout
+                thumbnails="/poster-video.png"
+                icons={defaultLayoutIcons}
+              />
+            </MediaPlayer>
+            {/* <ReactPlayer
+            playsInline
               className="w-full h-full min-h-[320px]"
               controls
               width="100%"
@@ -62,7 +89,7 @@ export function VideoPlayer() {
                 }
               }}
               url="https://www.youtube.com/watch?v=Xp_bt4BrvxI"
-            />
+            /> */}
           </div>
         )}
       </div>

@@ -15,6 +15,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@vercel/analytics": "^1.4.0",
     "@vercel/speed-insights": "^1.1.0",
+    "@vidstack/react": "^1.12.12",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "input-otp": "^1.4.1",
@@ -29,6 +30,7 @@
     "sonner": "^1.7.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
+    "video-react": "^0.16.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
