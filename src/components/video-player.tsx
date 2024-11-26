@@ -16,6 +16,7 @@ const URL_VIDEO =
   "https://res.cloudinary.com/moraisdev/video/upload/v1658243266/samples/cld-sample-video.mp4";
 
 const URL_VIDEO_R2 = "https://r2.moraisgabriel.com.br/main_video.mp4";
+const VIDEO_YOUTUBE_URL = "https://www.youtube.com/watch?v=Xp_bt4BrvxI";
 export const FallbackLoading = () => {
   return (
     <div className="flex w-full h-full items-center justify-center text-primary">
@@ -61,10 +62,9 @@ export function VideoPlayer() {
           <div className="w-full h-full justify-center items-center">
             <MediaPlayer
               playsInline
-              title="Sprite Fight"
-              src="https://www.youtube.com/watch?v=Xp_bt4BrvxI"
+              title="Natal 2024"
+              src={VIDEO_YOUTUBE_URL}
               onTimeUpdate={(e) => {
-                console.log("Sprite fight", e);
                 if (e.currentTime >= 142.239576) {
                   setShowConfirmButton(true);
                 }
