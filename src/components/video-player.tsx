@@ -48,28 +48,20 @@ export function VideoPlayer() {
           Assista o vídeo
         </p>
         {showPlayer && (
-          <div className="w-full justify-center items-center">
+          <div className="w-full h-full justify-center items-center">
             {/* <Player src={URL_VIDEO} onTimeUpdate={handleTimeUpdate} /> */}
             <ReactPlayer
+              className="w-full h-full min-h-[320px]"
               controls
               width="100%"
-              height="100%"
-              poster=""
-              config={{
-                file: {
-                  attributes: {
-                    controlsList: ["nodownload"], // Isso oculta o botão de download
-                    poster: "/poster-video.png",
-                  },
-                },
-              }}
+              height={100}
+              style={{ minHeight: "300px", maxHeight: "100%" }}
               onProgress={(e) => {
                 if (e.playedSeconds >= 142.239576) {
                   setShowConfirmButton(true);
                 }
               }}
-              playsInline={true}
-              url="https://r2.moraisgabriel.com.br/main-video.mp4"
+              url="https://www.youtube.com/watch?v=Xp_bt4BrvxI"
             />
           </div>
         )}
