@@ -62,7 +62,7 @@ export function VideoPlayer() {
             <MediaPlayer
               playsInline
               title="Sprite Fight"
-              src={URL_VIDEO_R2}
+              src="https://www.youtube.com/watch?v=Xp_bt4BrvxI"
               onTimeUpdate={(e) => {
                 console.log("Sprite fight", e);
                 if (e.currentTime >= 142.239576) {
