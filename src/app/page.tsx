@@ -11,7 +11,7 @@ export default function Home() {
           Natal Morais
         </h1>
         <p className="font-merriweather text-lg sm:text-2xl mt-4 text-primary font-light w-full text-center  ">
-          Estamos pensando em construir uma nova memória com você...
+          Queremos construir uma nova memória com você...
         </p>
         <Suspense fallback={<FallbackLoading />}>
           <VideoPlayer />

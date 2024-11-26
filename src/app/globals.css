@@ -9,6 +9,14 @@ body {
   font-family: "Cinzel Decorative", "Merriweather", "Arial" sans-serif;
 }
 
+video::-webkit-media-controls-timeline,
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display {
+    display: none;
+}
+
+
+
 @layer base {
   :root {
     --background: #132239;
