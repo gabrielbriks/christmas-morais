@@ -69,7 +69,7 @@ export function VideoPlayer() {
                 }
               }}
               playsInline={true}
-              url="https://natal.moraisgabriel.com.br/main-video.mp4"
+              url="https://r2.moraisgabriel.com.br/main-video.mp4"
             />
           </div>
         )}
