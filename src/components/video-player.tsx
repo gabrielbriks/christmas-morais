@@ -53,13 +53,13 @@ export function VideoPlayer() {
   };
 
   return (
-    <div className="flex flex-col w-full h-full max-h-screen max-w-screen-lg items-center justify-between mt-20">
+    <div className="flex flex-col w-full h-full max-w-screen-lg items-center justify-between mt-20">
       <div className="flex flex-col min-w-full max-w-lg h-full gap-4 ">
         <p className="font-merriweather italic text-center w-full text-primary text-lg">
           Assista o vídeo
         </p>
         {showPlayer && (
-          <div className="w-full h-full justify-center items-center">
+          <>
             <MediaPlayer
               playsInline
               title="Natal 2024"
@@ -90,12 +90,12 @@ export function VideoPlayer() {
               }}
               url="https://www.youtube.com/watch?v=Xp_bt4BrvxI"
             /> */}
-          </div>
+          </>
         )}
       </div>
 
       {showConfirmButton && (
-        <div className="flex flex-col h-full justify-end items-center mt-36 flex-1 py-16">
+        <div className="flex flex-col h-full justify-end items-center max-md:mt-20 md:mt-36 flex-1 py-16">
           {/* Exibe o botão somente quando o vídeo estiver em 90% ou mais */}
           <div className="flex-col justify-end ">
             <p className="text-lg font-merriweather font-semibold text-primary">
