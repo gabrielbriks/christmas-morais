@@ -15,7 +15,7 @@ import "@vidstack/react/player/styles/default/theme.css";
 const URL_VIDEO =
   "https://res.cloudinary.com/moraisdev/video/upload/v1658243266/samples/cld-sample-video.mp4";
 
-const URL_VIDEO_R2 = "https://r2.moraisgabriel.com.br/main-video.mp4";
+const URL_VIDEO_R2 = "https://r2.moraisgabriel.com.br/main_video.mp4";
 export const FallbackLoading = () => {
   return (
     <div className="flex w-full h-full items-center justify-center text-primary">
