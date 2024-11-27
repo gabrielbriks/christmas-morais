@@ -11,12 +11,12 @@ import {
 } from "@vidstack/react/player/layouts/default";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import "@vidstack/react/player/styles/default/theme.css";
-
-const URL_VIDEO =
-  "https://res.cloudinary.com/moraisdev/video/upload/v1658243266/samples/cld-sample-video.mp4";
+import Link from "next/link";
 
 const URL_VIDEO_R2 = "https://r2.moraisgabriel.com.br/main_video.mp4";
 const VIDEO_YOUTUBE_URL = "https://www.youtube.com/watch?v=Xp_bt4BrvxI";
+const SECONDS_VIDEO_ENDED_FOR_SHOW_BUTTON = 142.239576;
+const URL_WHATS_GROUP = "https://bit.ly/natal-morais-group";
 export const FallbackLoading = () => {
   return (
     <div className="flex w-full h-full items-center justify-center text-primary">
@@ -41,17 +41,6 @@ export function VideoPlayer() {
     setShowPlayer(true);
   }, [cldUrlVide]);
 
-  const handleTimeUpdate = (event: any) => {
-    const videoElement = event.currentTarget;
-    const currentTime = videoElement.currentTime;
-    const duration = videoElement.duration;
-
-    // Verifica se o vídeo está em 90% ou mais
-    if (currentTime / duration >= 0.9 && !showConfirmButton) {
-      setShowConfirmButton(true);
-    }
-  };
-
   return (
     <div className="flex flex-col w-full h-full max-w-screen-lg items-center justify-between mt-20">
       <div className="flex flex-col min-w-full max-w-lg h-full gap-4 ">
@@ -65,7 +54,8 @@ export function VideoPlayer() {
               title="Natal 2024"
               src={VIDEO_YOUTUBE_URL}
               onTimeUpdate={(e) => {
-                if (e.currentTime >= 142.239576) {
+                // Verifica se o vídeo está no minuto final do video
+                if (e.currentTime >= SECONDS_VIDEO_ENDED_FOR_SHOW_BUTTON) {
                   setShowConfirmButton(true);
                 }
               }}
@@ -76,37 +66,23 @@ export function VideoPlayer() {
                 icons={defaultLayoutIcons}
               />
             </MediaPlayer>
-            {/* <ReactPlayer
-            playsInline
-              className="w-full h-full min-h-[320px]"
-              controls
-              width="100%"
-              height={100}
-              style={{ minHeight: "300px", maxHeight: "100%" }}
-              onProgress={(e) => {
-                if (e.playedSeconds >= 142.239576) {
-                  setShowConfirmButton(true);
-                }
-              }}
-              url="https://www.youtube.com/watch?v=Xp_bt4BrvxI"
-            /> */}
           </>
         )}
       </div>
 
       {showConfirmButton && (
-        <div className="flex flex-col h-full justify-end items-center max-md:mt-20 md:mt-36 flex-1 py-16">
+        <div className="flex flex-col h-full justify-end items-center max-md:mt-15 md:mt-20 flex-1 py-16">
           {/* Exibe o botão somente quando o vídeo estiver em 90% ou mais */}
-          <div className="flex-col justify-end ">
-            <p className="text-lg font-merriweather font-semibold text-primary">
+          <div className="flex-col justify-end gap-4 ">
+            <p className="text-lg font-merriweather font-semibold text-primary mb-5">
               Gostaria de estar conosco?
             </p>
-            <button
-              onClick={() => alert("Obrigado por confirmar seu interesse!")}
+            <Link
+              href={URL_WHATS_GROUP}
               className="mt-4 px-6 py-3 bg-primary text-slate-900 font-semibold font-merriweather rounded-lg hover:bg-primary/40"
             >
               Sim, quero participar!
-            </button>
+            </Link>
           </div>
         </div>
       )}
