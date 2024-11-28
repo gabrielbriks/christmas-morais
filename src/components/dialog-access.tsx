@@ -60,7 +60,7 @@ export function DialogAccess() {
       <DialogContent className="rounded-lg">
         <DialogHeader className="justify-center items-center">
           <DialogTitle className="text-primary text-2xl font-merriweather">
-            Insira aqui o PIN de acesso?
+            Insira aqui o PIN de acesso
           </DialogTitle>
           <DialogDescription className="text-primary text-base font-merriweather">
             Se você não sabe qual é, retorne na mensagem que lhe enviamos.
