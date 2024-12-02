@@ -44,7 +44,7 @@ export async function confirmAttendance(formData: FormData) {
       return { success: false, message: "Erro concluir confirmação." };
     });
 
-  revalidatePath("/");
+  revalidatePath("/confirmation");
 
   return { success: true, message: "Presença confirmada com sucesso!" };
 }
