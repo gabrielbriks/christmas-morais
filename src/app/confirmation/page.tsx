@@ -17,8 +17,10 @@ import type { CategoryAPIResultType } from "@/src/types/category-api-result";
 import type { DishesAPIResult } from "@/src/types/dishes-api-result";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { confirmAttendance } from "../actions/confirm-attendance";
 
@@ -39,6 +41,7 @@ type CountDishSelectedType = { _count: { dishId: number }; dishId: string };
 type DishSelectedWithCount = { _count: { dishId: number }; dishId: string };
 
 export default function ConfirmationPage() {
+  const { replace } = useRouter();
   const [selectedDishes, setSelectedDishes] = useState<
     DishSelectedWithCount[] | []
   >([]);
@@ -52,6 +55,7 @@ export default function ConfirmationPage() {
     success: boolean;
   } | null>(null);
   const [newGuest, setNewGuest] = useState("");
+  const [savingConfirmations, setSavingConfirmations] = useState(false);
 
   const {
     control,
@@ -117,6 +121,7 @@ export default function ConfirmationPage() {
   };
 
   const onSubmit = async (data: ConfirmationFormData) => {
+    setSavingConfirmations(true);
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("companions", data.guests.join(", "));
@@ -126,9 +131,17 @@ export default function ConfirmationPage() {
 
     const result = await confirmAttendance(formData);
     setSubmitStatus(result);
-    // if (result.success) {
-    //   getSelectedDishes().then(setSelectedDishes);
-    // }
+
+    if (result.success) {
+      // Limpa os inputs após o envio
+      replace("/confirmation/done");
+    }
+
+    if (!result.success) {
+      toast.error(result.message);
+    }
+
+    setSavingConfirmations(false);
   };
 
   return (

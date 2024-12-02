@@ -17,7 +17,7 @@ model User {
   id           String         @id @default(cuid())
   name         String         @unique
   companions   Companion[]
-  createdAt    DateTime
+  createdAt    DateTime       @default(now())
   SelectedDish SelectedDish[]
 }
 
@@ -30,7 +30,7 @@ model Companion {
 
 model Dishes {
   id         String         @id @default(cuid())
-  name       String
+  name       String         @unique
   selected   SelectedDish[]
   category   Category?      @relation(fields: [categoryId], references: [id])
   categoryId String?
@@ -38,8 +38,8 @@ model Dishes {
 
 model Category {
   id     String   @id @default(cuid())
-  name   String // Nome da categoria, e.g., "Pratos Principais"
-  dishes Dishes[] // Relacionamento com os pratos
+  name   String   @unique
+  dishes Dishes[]
 }
 
 model SelectedDish {
