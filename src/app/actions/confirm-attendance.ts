@@ -12,7 +12,6 @@ export async function confirmAttendance(formData: FormData) {
   const dishes = formData.getAll("dishes") as string[];
 
   // Atualiza a contagem de pratos selecionados
-  console.log("backend - dishes", dishes);
   // Simula o salvamento dos dados
   if (!name) {
     return { success: false, message: "Nome ausente ou inválido." };
@@ -44,8 +43,6 @@ export async function confirmAttendance(formData: FormData) {
       console.error("Error creating user", error);
       return { success: false, message: "Erro concluir confirmação." };
     });
-
-  console.log("Confirmação recebida:", { name, companions, dishes });
 
   revalidatePath("/");
 

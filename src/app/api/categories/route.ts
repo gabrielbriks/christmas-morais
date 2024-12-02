@@ -9,7 +9,5 @@ export async function GET() {
     },
   });
 
-  console.log("CATEGORIES", result);
-
   return NextResponse.json({ result });
 }

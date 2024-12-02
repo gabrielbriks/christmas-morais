@@ -87,7 +87,6 @@ export default function ConfirmationPage() {
 
   useEffect(() => {
     getSelectedDishesAPI().then((response: any) => {
-      console.log("values Selected", response);
       setSelectedDishes(response.result as DishSelectedWithCount[]);
     });
 
@@ -126,8 +125,6 @@ export default function ConfirmationPage() {
     formData.append("name", data.name);
     formData.append("companions", data.guests.join(", "));
     data.dishes.forEach((dish) => formData.append("dishes", dish));
-
-    console.log(data);
 
     const result = await confirmAttendance(formData);
     setSubmitStatus(result);

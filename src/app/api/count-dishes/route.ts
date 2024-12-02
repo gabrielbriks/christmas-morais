@@ -7,7 +7,5 @@ export async function GET() {
     _count: { dishId: true },
   });
 
-  console.log("GET TOTAL", result);
-
   return NextResponse.json({ result });
 }

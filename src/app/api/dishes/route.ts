@@ -7,16 +7,9 @@ export async function GET() {
       id: true,
       name: true,
       categoryId: true,
-      // category: {
-      //   select: {
-      //     name: true,
-      //   },
-      // },
       _count: true,
     },
   });
-
-  console.log("GET TOTAL", result);
 
   return NextResponse.json({ result });
 }

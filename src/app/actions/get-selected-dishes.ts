@@ -5,7 +5,5 @@ export async function getSelectedDishes() {
     _count: { dishId: true },
   });
 
-  console.log(totalSelecteds);
-
   return { totalSelecteds };
 }
