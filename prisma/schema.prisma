@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @default(cuid())
+  name         String         @unique
+  companions   Companion[]
+  createdAt    DateTime
+  SelectedDish SelectedDish[]
+}
+
+model Companion {
+  id     String @id @default(cuid())
+  name   String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model Dishes {
+  id         String         @id @default(cuid())
+  name       String
+  selected   SelectedDish[]
+  category   Category?      @relation(fields: [categoryId], references: [id])
+  categoryId String?
+}
+
+model Category {
+  id     String   @id @default(cuid())
+  name   String // Nome da categoria, e.g., "Pratos Principais"
+  dishes Dishes[] // Relacionamento com os pratos
+}
+
+model SelectedDish {
+  id        String   @id @default(cuid())
+  dishId    String
+  dish      Dishes   @relation(fields: [dishId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}

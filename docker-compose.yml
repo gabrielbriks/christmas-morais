@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: bitnami/postgresql:latest
+    container_name: morais_christmas
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: morais_christmas
+    ports:
+      - "5432:5432"
