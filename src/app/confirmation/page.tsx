@@ -24,7 +24,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { confirmAttendance } from "../actions/confirm-attendance";
 
-export const confirmationSchema = z.object({
+const confirmationSchema = z.object({
   name: z
     .string()
     .min(2, { message: "O nome deve ter pelo menos 2 caracteres" }),
@@ -34,7 +34,7 @@ export const confirmationSchema = z.object({
     .min(1, { message: "Selecione pelo menos um prato" }),
 });
 
-export type ConfirmationFormData = z.infer<typeof confirmationSchema>;
+type ConfirmationFormData = z.infer<typeof confirmationSchema>;
 
 type CountDishSelectedType = { _count: { dishId: number }; dishId: string };
 
@@ -300,61 +300,6 @@ export default function ConfirmationPage() {
                         ))}
                     </div>
                   ))}
-                  {/* {LIST_FOOD_CATEGORIES.map((category) => (
-                    <div key={category.category}>
-                      <h3 className="font-semibold text-md">
-                        {category.category}
-                      </h3>
-                      <div className="mt-2 space-y-7">
-                        {category.items.map((dish) => (
-                          <div
-                            key={dish}
-                            className="flex items-center space-x-1"
-                          >
-                            <Controller
-                              name="dishes"
-                              control={control}
-                              render={({ field }) => (
-                                <Checkbox
-                                  id={dish}
-                                  className="h-6 w-6"
-                                  checked={field.value?.includes(dish)}
-                                  onCheckedChange={(checked) => {
-                                    const updatedDishes = checked
-                                      ? [...field.value, dish]
-                                      : field.value?.filter(
-                                          (d: string) => d !== dish
-                                        );
-                                    setValue("dishes", updatedDishes, {
-                                      shouldValidate: true,
-                                    });
-                                  }}
-                                />
-                              )}
-                            />
-                            <label
-                              htmlFor={dish}
-                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                            >
-                              <span
-                                className={cn(
-                                  " rounded-md px-2 font-semibold",
-                                  selectedDishes[dish] > 2
-                                    ? "bg-orange-600/50"
-                                    : selectedDishes[dish] >= 3
-                                    ? "bg-green-600/50"
-                                    : "bg-red-600/30"
-                                )}
-                              >
-                                {selectedDishes[dish] || 0}
-                              </span>{" "}
-                              {dish}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))} */}
                 </div>
 
                 {errors.dishes && (
@@ -364,7 +309,11 @@ export default function ConfirmationPage() {
                 )}
               </div>
             </div>
-            <Button type="submit" className="w-full mt-4 bg-background">
+            <Button
+              type="submit"
+              className="w-full mt-4 bg-background"
+              disabled={savingConfirmations}
+            >
               Confirmar Presença
             </Button>
           </form>
