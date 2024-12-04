@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingDefault } from "@/src/components/loading-default";
 import { Button } from "@/src/components/ui/button";
 import {
   Card,
@@ -119,6 +120,10 @@ export default function ConfirmationPage() {
     }
   };
 
+  const getLengthDishSelected = (dishId: string) => {
+    return selectedDishes.find((f) => f.dishId == dishId)?._count.dishId || 0;
+  };
+
   const onSubmit = async (data: ConfirmationFormData) => {
     setSavingConfirmations(true);
     const formData = new FormData();
@@ -236,70 +241,75 @@ export default function ConfirmationPage() {
                   </p>
                 )}
                 <div className="mt-4 space-y-4">
-                  {listCategories.map((category) => (
-                    <div key={category.name}>
-                      <h3 className="font-semibold text-md">{category.name}</h3>
-                      {listDishes
-                        .filter((f) => f.categoryId == category.id)
-                        .map((dish) => (
-                          <div
-                            className="mt-2 space-y-7"
-                            key={`${dish.name}_${dish.id}`}
-                          >
-                            <div
-                              key={dish.id}
-                              className="flex items-center space-x-1"
-                            >
-                              <Controller
-                                name="dishes"
-                                control={control}
-                                render={({ field }) => (
-                                  <Checkbox
-                                    id={dish.id}
-                                    className="h-6 w-6"
-                                    checked={field.value?.includes(dish.id)}
-                                    onCheckedChange={(checked) => {
-                                      const updatedDishes = checked
-                                        ? [...field.value, dish.id]
-                                        : field.value?.filter(
-                                            (d: string) => d !== dish.id
-                                          );
-                                      setValue("dishes", updatedDishes, {
-                                        shouldValidate: true,
-                                      });
-                                    }}
-                                  />
-                                )}
-                              />
-                              <label
-                                htmlFor={dish.id}
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                              >
-                                <span
-                                  className={cn(
-                                    " rounded-md px-2 font-semibold",
-                                    selectedDishes.find(
-                                      (f) => f.dishId == dish.id
-                                    )?._count.dishId || 0 > 2
-                                      ? "bg-blue-600/50"
-                                      : selectedDishes.find(
-                                          (f) => f.dishId == dish.id
-                                        )?._count.dishId || 0 >= 3
-                                      ? "bg-green-600/50"
-                                      : "bg-red-600/30"
-                                  )}
-                                >
-                                  {selectedDishes.find(
-                                    (f) => f.dishId == dish.id
-                                  )?._count.dishId || 0}
-                                </span>{" "}
-                                {dish.name}
-                              </label>
-                            </div>
-                          </div>
-                        ))}
+                  {!listCategories || listCategories.length == 0 ? (
+                    <div className="w-full p-2">
+                      <LoadingDefault />
                     </div>
-                  ))}
+                  ) : (
+                    listCategories.map((category) => (
+                      <div key={category.name}>
+                        <h3 className="font-semibold text-md">
+                          {category.name}
+                        </h3>
+                        {listDishes
+                          .filter((f) => f.categoryId == category.id)
+                          .map((dish) => (
+                            <div
+                              className="mt-2 space-y-7"
+                              key={`${dish.name}_${dish.id}`}
+                            >
+                              <div
+                                key={dish.id}
+                                className="flex items-center space-x-1"
+                              >
+                                <Controller
+                                  name="dishes"
+                                  control={control}
+                                  render={({ field }) => (
+                                    <Checkbox
+                                      id={dish.id}
+                                      className="h-6 w-6"
+                                      checked={field.value?.includes(dish.id)}
+                                      onCheckedChange={(checked) => {
+                                        const updatedDishes = checked
+                                          ? [...field.value, dish.id]
+                                          : field.value?.filter(
+                                              (d: string) => d !== dish.id
+                                            );
+                                        setValue("dishes", updatedDishes, {
+                                          shouldValidate: true,
+                                        });
+                                      }}
+                                    />
+                                  )}
+                                />
+                                <label
+                                  htmlFor={dish.id}
+                                  className="text-sm font-medium leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                >
+                                  <span
+                                    className={cn(
+                                      " rounded-md px-2 font-semibold bg-red-600/30",
+                                      getLengthDishSelected(dish.id) >= 1 &&
+                                        "bg-yellow-600/50",
+                                      getLengthDishSelected(dish.id) == 2 &&
+                                        "bg-blue-600/50",
+                                      getLengthDishSelected(dish.id) >= 3 &&
+                                        "bg-green-600/50"
+                                    )}
+                                  >
+                                    {selectedDishes.find(
+                                      (f) => f.dishId == dish.id
+                                    )?._count.dishId || 0}
+                                  </span>{" "}
+                                  {dish.name}
+                                </label>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    ))
+                  )}
                 </div>
 
                 {errors.dishes && (

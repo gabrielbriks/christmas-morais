@@ -44,6 +44,7 @@ export async function confirmAttendance(formData: FormData) {
       return { success: false, message: "Erro concluir confirmação." };
     });
 
+  // Limpa o cache da página de confirmação para atualizar os dados
   revalidatePath("/confirmation");
 
   return { success: true, message: "Presença confirmada com sucesso!" };
