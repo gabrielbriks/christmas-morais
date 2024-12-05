@@ -11,6 +11,9 @@ import {
   CardTitle,
 } from "@/src/components/ui/card";
 import { Checkbox } from "@/src/components/ui/checkbox";
+
+import { LoadingVerifyingName } from "@/src/components/loading-verifying-name copy";
+import { MessageVerifyingName } from "@/src/components/message-verify-name";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
 import { cn } from "@/src/lib/utils";
@@ -57,6 +60,8 @@ export default function ConfirmationPage() {
   } | null>(null);
   const [newGuest, setNewGuest] = useState("");
   const [savingConfirmations, setSavingConfirmations] = useState(false);
+  const [isVerifyingName, setIsVerifyingName] = useState(false);
+  const [existNameConfirmed, setExistNameConfirmed] = useState(false);
 
   const {
     control,
@@ -65,6 +70,7 @@ export default function ConfirmationPage() {
     formState: { errors },
     setValue,
     watch,
+    getValues,
   } = useForm<ConfirmationFormData>({
     resolver: zodResolver(confirmationSchema),
     defaultValues: {
@@ -124,6 +130,26 @@ export default function ConfirmationPage() {
     return selectedDishes.find((f) => f.dishId == dishId)?._count.dishId || 0;
   };
 
+  const handleVerifyExistenceName = async () => {
+    setIsVerifyingName(true);
+    const name = getValues("name");
+
+    const response = await fetch(`/api/verify-existence-name`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }),
+    });
+    const resultData = await response.json();
+    setIsVerifyingName(false);
+
+    if (resultData.guest) {
+      setTimeout(() => {
+        setExistNameConfirmed(true);
+      }, 500);
+      const { id, name } = resultData.guest;
+    }
+  };
+
   const onSubmit = async (data: ConfirmationFormData) => {
     setSavingConfirmations(true);
     const formData = new FormData();
@@ -144,6 +170,11 @@ export default function ConfirmationPage() {
     }
 
     setSavingConfirmations(false);
+  };
+
+  const handleInputChange = (e: any) => {
+    const upperCaseValue = e.target.value.toUpperCase();
+    setValue(e.target.name, upperCaseValue); // Atualiza o valor do campo utilizando a API do React Hook Form
   };
 
   return (
@@ -169,7 +200,9 @@ export default function ConfirmationPage() {
                   className="placeholder:text-sm"
                   id="name"
                   {...register("name")}
+                  onChange={handleInputChange}
                   placeholder="Ex: Gabriel Morais"
+                  onBlur={handleVerifyExistenceName}
                 />
                 {errors.name && (
                   <p className="text-red-500 text-sm mt-1 font-semibold">
@@ -340,6 +373,10 @@ export default function ConfirmationPage() {
           )}
         </CardFooter>
       </Card>
+      <LoadingVerifyingName isVerifyingName={isVerifyingName} />
+      {existNameConfirmed && (
+        <MessageVerifyingName isVerifyingName={existNameConfirmed} />
+      )}
     </div>
   );
 }
