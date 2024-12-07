@@ -3,7 +3,6 @@ import { getCldVideoUrl } from "next-cloudinary";
 // import Player from "next-video/player";
 import { useEffect, useState } from "react";
 // import ReactPlayer from "react-player";
-
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
 import {
   defaultLayoutIcons,
@@ -62,6 +61,11 @@ export function VideoPlayerConfirmation() {
               }}
             >
               <MediaProvider />
+
+              {/* <FullscreenButton className="vds-button">
+                <FullscreenIcon className="fs-enter-icon vds-icon" />
+                <FullscreenExitIcon className="fs-exit-icon vds-icon" />
+              </FullscreenButton> */}
               <DefaultVideoLayout
                 thumbnails="/poster-video.png"
                 icons={defaultLayoutIcons}
