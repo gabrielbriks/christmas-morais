@@ -49,7 +49,7 @@ export function VideoPlayerConfirmation() {
         {showPlayer && (
           <>
             <MediaPlayer
-              playsInline
+              // playsInline
               title="Natal 2024"
               src={VIDEO_YOUTUBE_URL}
               onTimeUpdate={(e) => {
@@ -61,11 +61,6 @@ export function VideoPlayerConfirmation() {
               }}
             >
               <MediaProvider />
-
-              {/* <FullscreenButton className="vds-button">
-                <FullscreenIcon className="fs-enter-icon vds-icon" />
-                <FullscreenExitIcon className="fs-exit-icon vds-icon" />
-              </FullscreenButton> */}
               <DefaultVideoLayout
                 thumbnails="/poster-video.png"
                 icons={defaultLayoutIcons}
