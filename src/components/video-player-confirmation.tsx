@@ -15,7 +15,7 @@ import Link from "next/link";
 
 const URL_VIDEO_R2 = "https://r2.moraisgabriel.com.br/main_video.mp4";
 const VIDEO_YOUTUBE_URL = "https://www.youtube.com/watch?v=lQ7JMWglv08";
-const SECONDS_VIDEO_ENDED_FOR_SHOW_BUTTON = 142.239576;
+const SECONDS_VIDEO_ENDED_FOR_SHOW_BUTTON = 430.89055;
 const URL_WHATS_GROUP = "https://bit.ly/natal-morais-group";
 export const FallbackLoading = () => {
   return (
@@ -74,15 +74,15 @@ export function VideoPlayerConfirmation() {
       {showConfirmButton && (
         <div className="flex flex-col h-full justify-end items-center max-md:mt-15 md:mt-20 flex-1 py-16">
           {/* Exibe o botão somente quando o vídeo estiver em 90% ou mais */}
-          <div className="flex-col justify-end gap-4 ">
-            <p className="text-lg font-merriweather font-semibold text-primary mb-5">
-              Gostaria de estar conosco?
+          <div className="flex flex-col justify-end ">
+            <p className="text-xl font-merriweather font-semibold text-primary mb-5">
+              Confirme a sua presença!
             </p>
             <Link
-              href={URL_WHATS_GROUP}
-              className="mt-4 px-6 py-3 bg-primary text-slate-900 font-semibold font-merriweather rounded-lg hover:bg-primary/40"
+              href="/confirmation"
+              className="w-full text-center mt-2 px-6 py-3 bg-primary text-base text-slate-900 font-semibold font-merriweather rounded-lg hover:bg-primary/40"
             >
-              Sim, quero participar!
+              Confirmar agora
             </Link>
           </div>
         </div>
