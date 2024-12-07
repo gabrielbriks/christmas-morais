@@ -14,7 +14,7 @@ import "@vidstack/react/player/styles/default/theme.css";
 import Link from "next/link";
 
 const URL_VIDEO_R2 = "https://r2.moraisgabriel.com.br/main_video.mp4";
-const VIDEO_YOUTUBE_URL = "https://www.youtube.com/watch?v=lQ7JMWglv08";
+const VIDEO_YOUTUBE_URL = "https://www.youtube.com/watch?v=FwLR9lrhFvo";
 const SECONDS_VIDEO_ENDED_FOR_SHOW_BUTTON = 430.89055;
 const URL_WHATS_GROUP = "https://bit.ly/natal-morais-group";
 export const FallbackLoading = () => {
@@ -57,7 +57,6 @@ export function VideoPlayerConfirmation() {
               src={VIDEO_YOUTUBE_URL}
               onTimeUpdate={(e) => {
                 // Verifica se o vídeo está no minuto final do video
-                console.log(e.currentTime);
                 if (e.currentTime >= SECONDS_VIDEO_ENDED_FOR_SHOW_BUTTON) {
                   setShowConfirmButton(true);
                 }
