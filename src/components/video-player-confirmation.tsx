@@ -38,17 +38,6 @@ export function VideoPlayerConfirmation() {
   });
 
   // let player = useRef<MediaPlayerInstance>(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    function reportWindowSize() {
-      setWindowWidth(window.innerWidth);
-    }
-    // Trigger this function on resize
-    window.addEventListener("resize", reportWindowSize);
-    //  Cleanup for componentWillUnmount
-    return () => window.removeEventListener("resize", reportWindowSize);
-  }, []);
 
   useEffect(() => {
     setShowPlayer(true);
@@ -63,7 +52,7 @@ export function VideoPlayerConfirmation() {
         {showPlayer && (
           <>
             <MediaPlayer
-              playsInline={windowWidth >= 1024}
+              playsInline
               title="Natal 2024"
               src={VIDEO_YOUTUBE_URL}
               onTimeUpdate={(e) => {
