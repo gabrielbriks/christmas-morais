@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 // import ReactPlayer from "react-player";
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
 import {
+  DefaultAudioLayout,
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
@@ -36,6 +37,19 @@ export function VideoPlayerConfirmation() {
     src: "samples/cld-sample-video",
   });
 
+  // let player = useRef<MediaPlayerInstance>(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function reportWindowSize() {
+      setWindowWidth(window.innerWidth);
+    }
+    // Trigger this function on resize
+    window.addEventListener("resize", reportWindowSize);
+    //  Cleanup for componentWillUnmount
+    return () => window.removeEventListener("resize", reportWindowSize);
+  }, []);
+
   useEffect(() => {
     setShowPlayer(true);
   }, [cldUrlVide]);
@@ -49,7 +63,7 @@ export function VideoPlayerConfirmation() {
         {showPlayer && (
           <>
             <MediaPlayer
-              // playsInline
+              playsInline={windowWidth >= 1024}
               title="Natal 2024"
               src={VIDEO_YOUTUBE_URL}
               onTimeUpdate={(e) => {
@@ -65,6 +79,7 @@ export function VideoPlayerConfirmation() {
                 thumbnails="/poster-video.png"
                 icons={defaultLayoutIcons}
               />
+              <DefaultAudioLayout thumbnails="/poster-video.png" icons={} />
             </MediaPlayer>
           </>
         )}
