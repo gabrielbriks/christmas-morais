@@ -1,8 +1,18 @@
 import { Suspense } from "react";
 import { DialogAccess } from "../components/dialog-access";
 import { FallbackLoading, VideoPlayer } from "../components/video-player";
+import { VideoPlayerConfirmation } from "../components/video-player-confirmation";
 
-export default function Home() {
+export default function Home({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  console.log("params", params);
+  console.log("searchParams", searchParams.v);
+
   return (
     <div className="min-h-screen max-h-full w-full bg-background text-white flex flex-col items-center sm:p-10 max-sm:p-5 bg-hero-background bg-no-repeat bg-auto sm:bg-right-bottom max-sm:bg-bottom">
       <DialogAccess />
@@ -14,7 +24,11 @@ export default function Home() {
           Queremos construir uma nova memória com você...
         </p>
         <Suspense fallback={<FallbackLoading />}>
-          <VideoPlayer />
+          {searchParams.v == "2" ? (
+            <VideoPlayerConfirmation />
+          ) : (
+            <VideoPlayer />
+          )}
         </Suspense>
       </main>
     </div>
