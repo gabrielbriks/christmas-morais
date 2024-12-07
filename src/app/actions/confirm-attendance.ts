@@ -46,6 +46,11 @@ export async function confirmAttendance(formData: FormData) {
 
   // Limpa o cache da página de confirmação para atualizar os dados
   revalidatePath("/confirmation");
+  revalidatePath("/api/get-selected-dishes");
 
-  return { success: true, message: "Presença confirmada com sucesso!" };
+  return {
+    success: true,
+    message: "Presença confirmada com sucesso!",
+    revalidated: true,
+  };
 }
