@@ -10,9 +10,6 @@ export default function Home({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  console.log("params", params);
-  console.log("searchParams", searchParams.v);
-
   return (
     <div className="min-h-screen max-h-full w-full bg-background text-white flex flex-col items-center sm:p-10 max-sm:p-5 bg-hero-background bg-no-repeat bg-auto sm:bg-right-bottom max-sm:bg-bottom">
       <DialogAccess />
