@@ -79,7 +79,10 @@ export function VideoPlayerConfirmation() {
                 thumbnails="/poster-video.png"
                 icons={defaultLayoutIcons}
               />
-              <DefaultAudioLayout thumbnails="/poster-video.png" icons={} />
+              <DefaultAudioLayout
+                thumbnails="/poster-video.png"
+                icons={defaultLayoutIcons}
+              />
             </MediaPlayer>
           </>
         )}
