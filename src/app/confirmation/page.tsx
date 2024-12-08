@@ -26,6 +26,7 @@ import { useEffect, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { trpc } from "../_trpc/trpc-client";
 import { confirmAttendance } from "../actions/confirm-attendance";
 
 const confirmationSchema = z.object({
@@ -92,41 +93,83 @@ export default function ConfirmationPage() {
 
   const watchGuests = watch("guests");
 
+  // const getSelectedDishesAPI = async () => {
+  //   const response = await fetch("/api/count-dishes", {
+  //     method: "GET",
+  //     next: { revalidate: 0 },
+  //   });
+  //   const resultData = await response.json();
+  //   return resultData as CountDishSelectedType;
+  // };
+
+  const {
+    data: countDishesData,
+    isLoading: loadingCountDishes,
+    error: errorCountDishes,
+    isError: isErrorCountDishes,
+    isSuccess: isSuccessCountDishes,
+  } = trpc.getCountDishes.useQuery();
+
+  const {
+    data: dishesData,
+    isLoading: isLoadingGetDishes,
+    error: errorGetDishes,
+    isError: isErrorGetDishes,
+    isSuccess: isSuccessGetDishes,
+  } = trpc.getDishes.useQuery();
+
+  const {
+    data: categoriesData,
+    isLoading: isLoadingCategoryData,
+    error: errorGetCategories,
+    isError: isErrorGetCategory,
+    isSuccess: isSuccessGetCategory,
+  } = trpc.getCategoriesDishes.useQuery();
+
+  const {
+    data: verifyExistenceNameData,
+    isPending: isLoadingVerifyExistenceName,
+    error: verifyExistenceName,
+    isError: isErrorVerifyExistenceName,
+    isSuccess: isSuccessVerifyExistenceName,
+    mutateAsync: verifyExistenceNameAsync,
+  } = trpc.verifyExistenceName.useMutation();
+
+  // const getDishesAPI = async () => {
+  //   const response = await fetch("/api/dishes", {
+  //     method: "GET",
+  //     next: { revalidate: 0 },
+  //   });
+  //   const resultData = await response.json();
+  //   return resultData.result;
+  // };
+
+  // const getCategories = async () => {
+  //   const response = await fetch("/api/categories", {
+  //     method: "GET",
+  //     next: { revalidate: 0 },
+  //   });
+  //   const resultData = await response.json();
+  //   return resultData.result as CategoryAPIResultType[];
+  // };
+
   useEffect(() => {
-    getSelectedDishesAPI().then((response: any) => {
-      setSelectedDishes(response.result as DishSelectedWithCount[]);
-    });
+    if (countDishesData?.result && selectedDishes) {
+      setSelectedDishes(countDishesData.result);
+      // setSelectedDishes(response.result as DishSelectedWithCount[]);
+    }
 
-    getDishesAPI().then((values) => setListDishes(values));
-    getCategories().then((values) => setListCategories(values));
-  }, []);
+    if (dishesData?.result) {
+      setListDishes(dishesData?.result);
+    }
 
-  const getSelectedDishesAPI = async () => {
-    const response = await fetch("/api/count-dishes", {
-      method: "GET",
-      next: { revalidate: 0 },
-    });
-    const resultData = await response.json();
-    return resultData as CountDishSelectedType;
-  };
+    if (categoriesData?.result) {
+      setListCategories(categoriesData?.result);
+    }
 
-  const getDishesAPI = async () => {
-    const response = await fetch("/api/dishes", {
-      method: "GET",
-      next: { revalidate: 0 },
-    });
-    const resultData = await response.json();
-    return resultData.result;
-  };
-
-  const getCategories = async () => {
-    const response = await fetch("/api/categories", {
-      method: "GET",
-      next: { revalidate: 0 },
-    });
-    const resultData = await response.json();
-    return resultData.result as CategoryAPIResultType[];
-  };
+    // getDishesAPI().then((values) => setListDishes(values));
+    // getCategories().then((values) => setListCategories(values));
+  }, [isSuccessCountDishes, isSuccessGetDishes, isSuccessGetCategory]);
 
   const handleAddGuest = () => {
     if (newGuest.trim() !== "") {
@@ -143,20 +186,24 @@ export default function ConfirmationPage() {
     setIsVerifyingName(true);
     const name = getValues("name");
 
-    const response = await fetch(`/api/verify-existence-name`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
-    });
-    const resultData = await response.json();
-    setIsVerifyingName(false);
+    // const response = await fetch(`/api/verify-existence-name`, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ name }),
+    // });
+    // const resultData = await response.json();
 
-    if (resultData.guest) {
+    await verifyExistenceNameAsync({ name });
+
+    if (isSuccessVerifyExistenceName && verifyExistenceNameData.guest?.name) {
       setTimeout(() => {
+        setIsVerifyingName(false);
         setExistNameConfirmed(true);
       }, 500);
-      const { id, name } = resultData.guest;
+      const { id, name } = verifyExistenceNameData.guest;
     }
+
+    setIsVerifyingName(false);
   };
 
   const onSubmit = async (data: ConfirmationFormData) => {
@@ -283,7 +330,7 @@ export default function ConfirmationPage() {
                   </p>
                 )}
                 <div className="mt-4 space-y-4">
-                  {!listCategories || listCategories.length == 0 ? (
+                  {isLoadingCategoryData ? (
                     <div className="w-full p-2">
                       <LoadingDefault />
                     </div>
@@ -383,9 +430,11 @@ export default function ConfirmationPage() {
         </CardFooter>
       </Card>
       <LoadingVerifyingName isVerifyingName={isVerifyingName} />
-      {existNameConfirmed && (
+      {existNameConfirmed ||
+      (verifyExistenceNameData?.success &&
+        verifyExistenceNameData.guest?.id) ? (
         <MessageVerifyingName isVerifyingName={existNameConfirmed} />
-      )}
+      ) : null}
     </div>
   );
 }

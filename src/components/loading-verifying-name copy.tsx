@@ -26,9 +26,9 @@ export function LoadingVerifyingName({
               <span className="text-xl font-medium">Aguarde ... </span>
             </DialogTitle>
             <DialogDescription>
-              <p className="text-center text-lg text-slate-800 mt-4">
+              <span className="text-center text-lg text-slate-800 mt-4">
                 Verificando nome e confirmação...
-              </p>
+              </span>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

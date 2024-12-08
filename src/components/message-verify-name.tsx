@@ -35,7 +35,7 @@ export function MessageVerifyingName({
                 </p>
                 <Link
                   href={"https://wa.me/5561985593550"}
-                  className="w-full mt-4 bg-background text-lg text-white p-2 rounded-md hover:cursor-pointer "
+                  className="w-full mt-4 bg-background text-center text-lg text-white p-2 rounded-md hover:cursor-pointer "
                 >
                   Enviar Mensagem
                 </Link>

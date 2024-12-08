@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Cinzel_Decorative, Merriweather } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
+import TrpcProvider from "./providers/trpc-provider";
 
 const cinzelDecorative = Cinzel_Decorative({
   subsets: ["latin"],
@@ -29,21 +30,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body
-        className={`${merriweather.variable} ${cinzelDecorative.variable}  antialiased`}
-      >
-        {children}
-        <Toaster
-          position="top-right"
-          toastOptions={{ closeButton: true }}
-          richColors
-          pauseWhenPageIsHidden
-          theme="light"
-          duration={7200}
-        />
-        <Analytics />
-        <SpeedInsights />
-      </body>
+      <TrpcProvider>
+        <body
+          className={`${merriweather.variable} ${cinzelDecorative.variable}  antialiased`}
+        >
+          {children}
+          <Toaster
+            position="top-right"
+            toastOptions={{ closeButton: true }}
+            richColors
+            pauseWhenPageIsHidden
+            theme="light"
+            duration={7200}
+          />
+          <Analytics />
+          <SpeedInsights />
+        </body>
+      </TrpcProvider>
     </html>
   );
 }
