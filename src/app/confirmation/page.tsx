@@ -102,19 +102,28 @@ export default function ConfirmationPage() {
   }, []);
 
   const getSelectedDishesAPI = async () => {
-    const response = await fetch("/api/count-dishes", { method: "GET" });
+    const response = await fetch("/api/count-dishes", {
+      method: "GET",
+      next: { revalidate: 0 },
+    });
     const resultData = await response.json();
     return resultData as CountDishSelectedType;
   };
 
   const getDishesAPI = async () => {
-    const response = await fetch("/api/dishes", { method: "GET" });
+    const response = await fetch("/api/dishes", {
+      method: "GET",
+      next: { revalidate: 0 },
+    });
     const resultData = await response.json();
     return resultData.result;
   };
 
   const getCategories = async () => {
-    const response = await fetch("/api/categories", { method: "GET" });
+    const response = await fetch("/api/categories", {
+      method: "GET",
+      next: { revalidate: 0 },
+    });
     const resultData = await response.json();
     return resultData.result as CategoryAPIResultType[];
   };
