@@ -34,6 +34,7 @@ export function LoginForm() {
     const result = await loginAdminAction(dataForm);
 
     if (result.authenticate) {
+      document.cookie = "admin-auth=true; path=/; max-age=3600";
       navigation.push("/admin/dashboard");
     } else {
       toast.error("Usuário ou senha invalido.", { duration: 8000 });
