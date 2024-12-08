@@ -38,6 +38,7 @@ export const appRouter = router({
 
     return { result };
   }),
+
   getDishesSelected: procedure.query(async ({ ctx }) => {
     const selectedDishes = await prisma.selectedDish.findMany({
       include: {
@@ -52,6 +53,7 @@ export const appRouter = router({
 
     return { selectedDishes };
   }),
+
   getDishes: procedure.query(async ({ ctx }) => {
     const result = await prisma.dishes.findMany({
       select: {
@@ -64,6 +66,7 @@ export const appRouter = router({
 
     return { result };
   }),
+
   getCategoriesDishes: procedure.query(async ({ ctx }) => {
     const result = await prisma.category.findMany({
       select: {
@@ -73,6 +76,58 @@ export const appRouter = router({
     });
 
     return { result };
+  }),
+
+  getInfoDashboard: procedure.query(async ({ ctx }) => {
+    const countGuests = await prisma.user.count().catch((err) => {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: `Erro ao recuperar total de convidados confirmados.`,
+        cause: err,
+      });
+    });
+    const countDishesSelected = await prisma.selectedDish
+      .count()
+      .catch((err) => {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: `Erro ao recuperar total de pratos selecionados.`,
+          cause: err,
+        });
+      });
+
+    const companionsList = await prisma.companion
+      .findMany({
+        select: {
+          name: true,
+        },
+      })
+      .catch((err) => {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: `Erro ao recuperar total de acompanhantes.`,
+          cause: err,
+        });
+      });
+
+    const companionsNames = companionsList.flatMap((c) => c.name.split(","));
+    const totalCompanions = companionsNames.length;
+
+    ///TODO: Implementar configuração para informar total de convidados
+    const TOTAL_GUEST_CONFIG = 40;
+
+    const totalGuest = countGuests + totalCompanions;
+    const totalGuestPendents =
+      TOTAL_GUEST_CONFIG - (countGuests + totalCompanions);
+
+    console.log("countDishesSelected", countDishesSelected);
+
+    return {
+      totalGuest: totalGuest,
+      totalDishesSelected: countDishesSelected,
+      totalGuestPendents: totalGuestPendents,
+      totalGuestConfigured: TOTAL_GUEST_CONFIG,
+    };
   }),
 });
 // export type definition of API
