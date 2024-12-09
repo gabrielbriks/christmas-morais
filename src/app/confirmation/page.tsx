@@ -210,7 +210,11 @@ export default function ConfirmationPage() {
     setSavingConfirmations(true);
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("companions", data.guests.join(", "));
+
+    if (data.guests.length > 0) {
+      formData.append("companions", data.guests.join(", "));
+    }
+
     data.dishes.forEach((dish) => formData.append("dishes", dish));
 
     const result = await confirmAttendance(formData);
