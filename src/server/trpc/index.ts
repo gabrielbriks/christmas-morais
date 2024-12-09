@@ -30,6 +30,27 @@ export const appRouter = router({
       console.log("Guest", guest);
       return { success: true, guest: guest };
     }),
+
+  getGuests: procedure.query(async ({ ctx }) => {
+    const guestsData = await prisma.user.findMany({
+      include: {
+        companions: true,
+      },
+    });
+
+    const guests = guestsData.map((guest) => {
+      const companions = guest.companions.flatMap((c) => c.name.split(","));
+
+      return {
+        id: guest.id,
+        name: guest.name,
+        companions: companions,
+      };
+    });
+
+    return { guests };
+  }),
+
   getCountDishes: procedure.query(async ({ ctx }) => {
     const result = await prisma.selectedDish.groupBy({
       by: ["dishId"],
