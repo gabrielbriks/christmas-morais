@@ -43,7 +43,7 @@ export function CardGuestInfo({
         {listCompanions.map((name) => (
           <div key={name} className="border rounded-md p-1">
             <div className="flex w-full justify-between">
-              <span className="text-slate-600 w-full text-xs flex gap-1 items-center p-1">
+              <span className="text-slate-600 w-full text-sm flex gap-1 items-center p-1">
                 <SquareUser strokeWidth={0.5} /> {name}
               </span>
             </div>
