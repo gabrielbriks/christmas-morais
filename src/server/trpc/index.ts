@@ -51,6 +51,44 @@ export const appRouter = router({
     return { guests };
   }),
 
+  getUserAndDishesSelected: procedure.query(async ({ ctx }) => {
+    const guests = await prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+    const dishes = await prisma.selectedDish.findMany({
+      include: {
+        dish: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    console.log(dishes);
+
+    const guestsDishes = guests.map((g) => {
+      const dishesFiltered = dishes.filter((d) => d.userId === g.id);
+      return {
+        guestId: g.id,
+        guestName: g.name,
+        dishes: dishesFiltered.map((d) => {
+          return { id: d.dish.id, name: d.dish.name };
+        }),
+      };
+    });
+
+    return { dishes: guestsDishes };
+  }),
+
   getCountDishes: procedure.query(async ({ ctx }) => {
     const result = await prisma.selectedDish.groupBy({
       by: ["dishId"],

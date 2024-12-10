@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
   const authCookieValue = request.cookies.get("admin-auth")?.value;
-  console.log("authCookieValue", authCookieValue);
   const hasAuthCookie = authCookieValue !== undefined;
 
   const isAuthenticated = hasAuthCookie && authCookieValue === "true";

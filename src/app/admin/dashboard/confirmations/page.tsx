@@ -20,6 +20,7 @@ export default function ListConfirmationsPage() {
           <LoadingDefault />
         ) : isErrorGuests ? (
           <p className="text-center text-primary text-lg">
+            Opps!
             {errorGuests.message}
           </p>
         ) : (
