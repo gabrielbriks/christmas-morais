@@ -3,6 +3,7 @@ import { trpc } from "@/src/app/utils/trpc";
 import { CardDishesInfo } from "@/src/components/dashboard/card-dishes-confirmed";
 import { HeaderPagesAdmin } from "@/src/components/header-pages-admin";
 import { LoadingDefault } from "@/src/components/loading-default";
+import { toast } from "sonner";
 
 export default function ConfirmedDishes() {
   const {
@@ -11,6 +12,10 @@ export default function ConfirmedDishes() {
     error: errorDishes,
     isError: isErrorDishes,
   } = trpc.getUserAndDishesSelected.useQuery();
+
+  if (isErrorDishes) {
+    toast.error(errorDishes.message);
+  }
 
   return (
     <div className="w-full h-full min-h-screen flex flex-col gap-4">

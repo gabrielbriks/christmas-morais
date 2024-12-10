@@ -3,6 +3,7 @@ import { trpc } from "@/src/app/utils/trpc";
 import { CardGuestInfo } from "@/src/components/dashboard/card-guest-info";
 import { HeaderPagesAdmin } from "@/src/components/header-pages-admin";
 import { LoadingDefault } from "@/src/components/loading-default";
+import { toast } from "sonner";
 
 export default function ListConfirmationsPage() {
   const {
@@ -11,6 +12,10 @@ export default function ListConfirmationsPage() {
     error: errorGuests,
     isError: isErrorGuests,
   } = trpc.getGuests.useQuery();
+
+  if (isErrorGuests) {
+    toast.error(errorGuests.message);
+  }
 
   return (
     <div className="flex flex-col w-full h-full min-h-screen ">
