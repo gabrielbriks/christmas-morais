@@ -17,7 +17,7 @@ export function CardItemDashboard({
   description,
 }: CardItemDashboardProps) {
   return (
-    <Card className="p-2 max-w-xs min-h-52">
+    <Card className="p-2 max-w-xs w-80 min-w-xs min-h-52">
       <CardHeader className="text-bas font-medium">{title}</CardHeader>
       <CardContent className="text-5xl  w-full text">{content}</CardContent>
       <CardDescription className="w-full text-center px-2">

@@ -29,7 +29,7 @@ export default function DashboardPage() {
         {isLoadingData ? (
           <LoadingDefault />
         ) : (
-          <div className="w-full grid grid-cols-2 lg:grid-cols-3 max-sm:grid-cols-1 gap-8 justify-center items-center ">
+          <div className="w-full grid grid-cols-2 lg:grid-cols-3 max-sm:grid-cols-1 gap-8 justify-items-center ">
             <CardItemDashboard
               title="Total Confirmados"
               content={infoDashboard?.totalGuest.toString() || "0"}
