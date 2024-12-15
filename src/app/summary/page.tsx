@@ -66,7 +66,7 @@ export default function SummaryPage({
 
         <div className="mt-10 flex flex-col w-full">
           <p className="font-merriweather text-lg sm:text-2xl ms:mt-4 text-primary font-light w-full text-center  max-sm:font-semibold  ">
-            Confirme se o nome seu está na lista e prepare-se para celebrar.
+            Confirme se o seu nome está na lista e prepare-se para celebrar.
           </p>
         </div>
 
