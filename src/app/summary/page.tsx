@@ -83,7 +83,7 @@ export default function SummaryPage({
             {isLoadingGuests ? (
               <LoadingDefault />
             ) : isErrorGuests ? (
-              <p className="text-center text-primary text-lg">
+              <p className="text-center text-background text-lg">
                 Opps!
                 {errorGuests.message}
               </p>
