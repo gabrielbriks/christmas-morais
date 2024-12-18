@@ -1,5 +1,6 @@
 "use client";
 
+import { Confetti } from "@/src/components/confetti";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { Suspense, useEffect, useState } from "react";
 import { LoadingDefault } from "./loading-default";
@@ -10,6 +11,11 @@ interface CountdownProps {
 
 const ElegantCountdown: React.FC<CountdownProps> = ({ targetDate }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [showConfetti, setShowConfetti] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setShowConfetti(false), 4000);
+  }, []);
 
   function calculateTimeLeft() {
     const difference = +targetDate - +new Date();
@@ -52,7 +58,7 @@ const ElegantCountdown: React.FC<CountdownProps> = ({ targetDate }) => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-6xl md:text-8xl font-bold text-[#cf3b38]"
+            className="text-4xl md:text-6xl font-bold text-[#cf3b38]"
           >
             {timeLeft[interval]}
           </motion.div>
@@ -68,7 +74,10 @@ const ElegantCountdown: React.FC<CountdownProps> = ({ targetDate }) => {
         {timeComponents.length ? (
           timeComponents
         ) : (
-          <span className="text-3xl text-white">O Dia Chegou!</span>
+          <>
+            {showConfetti && <Confetti />}
+            <span className="text-6xl text-white">O Dia Chegou!</span>
+          </>
         )}
       </div>
     </Suspense>

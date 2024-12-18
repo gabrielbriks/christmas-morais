@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import ReactConfetti from "react-confetti";
 
-export default function Confetti({
+export function Confetti({
   width = 0,
   height = 0,
   recycle = false,

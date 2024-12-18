@@ -1,5 +1,5 @@
 "use client";
-import Confetti from "@/src/components/confetti";
+import { Confetti } from "@/src/components/confetti";
 import {
   Card,
   CardContent,

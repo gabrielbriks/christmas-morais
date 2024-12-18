@@ -1,5 +1,8 @@
-import { Suspense } from "react";
+"use client";
+import { useRouter } from "next/navigation";
+import { Suspense, useEffect } from "react";
 import { DialogAccess } from "../components/dialog-access";
+import { LoadingDefault } from "../components/loading-default";
 import { FallbackLoading, VideoPlayer } from "../components/video-player";
 import { VideoPlayerConfirmation } from "../components/video-player-confirmation";
 
@@ -10,6 +13,19 @@ export default function Home({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const navigation = useRouter();
+  useEffect(() => {
+    navigation.replace("/summary");
+  }, []);
+
+  return (
+    <div className="w-full h-full min-h-screen flex justify-center items-center   ">
+      <div className="w-auto h-auto p-4 rounded-lg bg-zinc-200">
+        <LoadingDefault />
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen max-h-full w-full bg-background text-white flex flex-col items-center sm:p-10 max-sm:p-5 bg-hero-background bg-no-repeat bg-auto sm:bg-right-bottom max-sm:bg-bottom">
       <DialogAccess />
