@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
+import { LoadingDefault } from "./loading-default";
 
 interface CountdownProps {
   targetDate: Date;
@@ -51,7 +52,7 @@ const ElegantCountdown: React.FC<CountdownProps> = ({ targetDate }) => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl md:text-6xl font-bold text-[#cf3b38]"
+            className="text-6xl md:text-8xl font-bold text-[#cf3b38]"
           >
             {timeLeft[interval]}
           </motion.div>
@@ -62,13 +63,15 @@ const ElegantCountdown: React.FC<CountdownProps> = ({ targetDate }) => {
   });
 
   return (
-    <div className="flex flex-wrap justify-center items-center p-6 bg-transparent text-[#cf3b38] ">
-      {timeComponents.length ? (
-        timeComponents
-      ) : (
-        <span className="text-2xl text-background">O Dia Chegou!</span>
-      )}
-    </div>
+    <Suspense fallback={<LoadingDefault />}>
+      <div className="flex flex-wrap justify-center items-center p-4 bg-transparent text-[#cf3b38] ">
+        {timeComponents.length ? (
+          timeComponents
+        ) : (
+          <span className="text-3xl text-white">O Dia Chegou!</span>
+        )}
+      </div>
+    </Suspense>
   );
 };
 
