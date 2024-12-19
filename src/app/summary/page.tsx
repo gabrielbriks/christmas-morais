@@ -1,6 +1,7 @@
 "use client";
 // import { DialogAccess } from "@/src/components/dialog-access";
 import ElegantCountdown from "@/src/components/elegant-countdown";
+import { InfoLocalization } from "@/src/components/info-localization";
 import { useState } from "react";
 
 export default function SummaryPage({
@@ -48,6 +49,8 @@ export default function SummaryPage({
           <p className="text-white w-full text-center mt-10 py-4 font-medium font-merriweather text-xl">
             Em breve!
           </p>
+
+          <InfoLocalization />
         </div>
       </main>
     </div>
