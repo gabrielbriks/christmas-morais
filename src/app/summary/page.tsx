@@ -52,7 +52,7 @@ export default function SummaryPage({
         {/* <ListGuestsConfirmations /> */}
 
         <div className="mt-10 flex flex-col w-full h-auto bg-[#132239]/60 rounded-md  ">
-          <p className="font-merriweather text-3xl mt-10 mb-10 text-white w-full text-center">
+          <p className="font-merriweather text-2xl sm:text-3xl mt-10 mb-10 text-primary w-full text-center">
             Informações do Local
           </p>
           {/* <p className="text-white w-full text-center mt-10 py-4 font-medium font-merriweather text-xl">
