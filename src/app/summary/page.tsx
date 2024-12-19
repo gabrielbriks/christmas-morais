@@ -58,78 +58,73 @@ export default function SummaryPage({
           {/* <p className="text-white w-full text-center mt-10 py-4 font-medium font-merriweather text-xl">
             Em breve!
           </p> */}
+          <div className="w-full flex justify-center items-center">
+            <div className="max-w-md w-full flex flex-col p-2 justify-center items-center">
+              <p className="text-white w-full text-center mt-10 py-4 font-medium font-merriweather text-2xl">
+                Mary Hall
+              </p>
+              <div className="container mx-auto px-4 py-12 self-center">
+                <Carousel className="w-full max-w-3xl mx-auto">
+                  <CarouselContent>
+                    <CarouselItem>
+                      <Card className="border-none shadow-none">
+                        <CardContent className="p-0">
+                          <Image
+                            src="/marry-hall-capa2.jpeg"
+                            width={320}
+                            height={200}
+                            alt="Elegant photo 2"
+                            className="rounded-lg object-cover w-full h-[22vh] md:h-[32vh]"
+                          />
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                    <CarouselItem>
+                      <Card className="border-none shadow-none">
+                        <CardContent className="p-0">
+                          <Image
+                            src="/maryhall-local-referencia.png"
+                            width={320}
+                            height={200}
+                            alt="Elegant photo 2"
+                            className="rounded-lg object-cover w-full h-[22vh] md:h-[32vh]"
+                          />
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                    <CarouselItem>
+                      <Card className="border-none shadow-none">
+                        <CardContent className="p-0">
+                          <Image
+                            src="/maryhall-local-referencia2.png"
+                            width={320}
+                            height={200}
+                            alt="Elegant photo 2"
+                            className="rounded-lg object-cover w-full h-[22vh] md:h-[32vh]"
+                          />
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  </CarouselContent>
+                  <CarouselPrevious className="left-4 bg-background/60 hover:bg-white" />
+                  <CarouselNext className="right-4 bg-background/60 hover:bg-white" />
+                </Carousel>
+              </div>
 
-          <div className="max-w-md w-full flex flex-col p-2">
-            <p className="text-white w-full text-center mt-10 py-4 font-medium font-merriweather text-2xl">
-              Mary Hall
-            </p>
-            <div className="container mx-auto px-4 py-12">
-              <Carousel className="w-full max-w-3xl mx-auto">
-                <CarouselContent>
-                  <CarouselItem>
-                    <Card className="border-none shadow-none">
-                      <CardContent className="p-0">
-                        <Image
-                          src="/marry-hall-capa2.jpeg"
-                          width={320}
-                          height={200}
-                          alt="Elegant photo 2"
-                          className="rounded-lg object-cover w-full h-[22vh] md:h-[32vh]"
-                        />
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <Card className="border-none shadow-none">
-                      <CardContent className="p-0">
-                        <Image
-                          src="/maryhall-local-referencia.png"
-                          width={320}
-                          height={200}
-                          alt="Elegant photo 2"
-                          className="rounded-lg object-cover w-full h-[22vh] md:h-[32vh]"
-                        />
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <Card className="border-none shadow-none">
-                      <CardContent className="p-0">
-                        <Image
-                          src="/maryhall-local-referencia2.png"
-                          width={320}
-                          height={200}
-                          alt="Elegant photo 2"
-                          className="rounded-lg object-cover w-full h-[22vh] md:h-[32vh]"
-                        />
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                </CarouselContent>
-                <CarouselPrevious className="left-4 bg-background/60 hover:bg-white" />
-                <CarouselNext className="right-4 bg-background/60 hover:bg-white" />
-              </Carousel>
-            </div>
-            {/* <Image
-              className="rounded-md"
-              src="/marry-hall-capa2.jpeg"
-              width={320}
-              height={200}
-              alt="location thumb"
-            /> */}
-            <div className="mt-2 flex flex-col gap-1">
-              <span className="px-1 text-lg mt-1 font-merriweather font-semibold w-full text-center mb-2">
-                Endereço & Localização:
-              </span>
-              <p className="px-2 text-sm mt-1 font-merriweather">
-                Em frente à EPTG
-              </p>
-              <p className="px-2 text-sm mt-1 font-merriweather">
-                Colônia Agrícola Samambaia Taguatinga, Brasília
-              </p>
-              <p className="px-2 text-sm mt-1 font-merriweather">
-                14 R. Marginal EPTG
-              </p>
+              <div className="mt-2 flex flex-col gap-1">
+                <span className="px-1 text-lg mt-1 font-merriweather font-semibold w-full text-center mb-2">
+                  Endereço & Localização:
+                </span>
+                <p className="px-2 text-sm mt-1 font-merriweather">
+                  Em frente à EPTG
+                </p>
+                <p className="px-2 text-sm mt-1 font-merriweather">
+                  Colônia Agrícola Samambaia Taguatinga, Brasília
+                </p>
+                <p className="px-2 text-sm mt-1 font-merriweather">
+                  14 R. Marginal EPTG
+                </p>
+              </div>
             </div>
           </div>
 
