@@ -1,4 +1,5 @@
 "use client";
+import { DialogAccess } from "@/src/components/dialog-access";
 // import { DialogAccess } from "@/src/components/dialog-access";
 import ElegantCountdown from "@/src/components/elegant-countdown";
 import { InfoLocalization } from "@/src/components/info-localization";
@@ -30,7 +31,7 @@ export default function SummaryPage({
 
   return (
     <div className="min-h-screen max-h-full w-full bg-background text-white flex flex-col items-center sm:p-10 max-sm:p-5 bg-hero-background bg-no-repeat bg-auto sm:bg-right-top max-sm:bg-top">
-      {/* <DialogAccess /> */}
+      <DialogAccess />
       <main className="flex flex-col items-center sm:items-start max-sm:mt-10">
         <h1 className="flex w-full justify-center items-center text-3xl font-cinzel lg:text-8xl max-w-xs:text-4xl max-sm:text-5xl sm:text-5xl max-md:text-6xl md:text-6xl text-primary min-[360px]:text-4xl min-[400px]:text-5xl">
           Natal Morais
@@ -123,6 +124,15 @@ export default function SummaryPage({
                 </p>
                 <p className="px-2 text-sm mt-1 font-merriweather">
                   14 R. Marginal EPTG
+                </p>
+              </div>
+
+              <div className="mt-10 flex flex-col gap-1">
+                <span className="px-1 text-lg mt-1 font-merriweather font-semibold w-full text-center mb-2">
+                  Horário do Almoço:
+                </span>
+                <p className="px-2 text-xl mt-1 font-merriweather w-full text-center">
+                  12:45
                 </p>
               </div>
             </div>
